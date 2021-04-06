@@ -15,16 +15,16 @@
 Create a resource group for the deployment.
 
 ```azurecli
-az group create --name github-pr-teams-notification-001 --location eastus
+az group create --name github-pr-teams-notification-002 --location eastus
 ```
 
 Run the following command to initiate the deployment (update with details from your environment).
 
 ```azurecli
 az deployment group create \
-    --resource-group github-pr-teams-notification-001 \
+    --resource-group github-pr-teams-notification-002 \
     --template-uri https://raw.githubusercontent.com/neilpeterson/github-pr-teams-notification/master/deployment/azuredeploy.json \
-    --parameters GitHubPAT=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 emailAddress=nepeters@microsoft.com
+    --parameters GitHubPAT=<> emailAddress=nepeters@microsoft.com
 ```
 
 Add `RemoveSourceControll=true` to remove source controll integration.
