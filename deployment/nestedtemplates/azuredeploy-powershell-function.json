@@ -27,7 +27,7 @@
             "type": "string"
         },
         "DelayDays": {
-            "type": "string"
+            "type": "int"
         }
     },
     "variables": {
