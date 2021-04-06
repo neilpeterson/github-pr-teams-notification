@@ -107,18 +107,6 @@
                     },
                     "KeyVaultName": {
                         "value": "[variables('kay-vault-name')]"
-                    },
-                    "TeamsWebHook": {
-                        "value": "[parameters('TeamsWebHook')]"
-                    },
-                    "PullRequestsAPI": {
-                        "value": "[parameters('PullRequestsAPI')]"
-                    },
-                    "PullRequestTitleFilter": {
-                        "value": "[parameters('PullRequestTitleFilter')]"
-                    },
-                    "DelayDays": {
-                        "value": "[parameters('DelayDays')]"
                     }
                 }
             }
@@ -153,6 +141,18 @@
                     },
                     "GitHubPATUri": {
                         "value": "[reference('key-vault').outputs.GitHubPATUri.value]"
+                    },
+                    "TeamsWebHook": {
+                        "value": "[parameters('TeamsWebHook')]"
+                    },
+                    "PullRequestsAPI": {
+                        "value": "[parameters('PullRequestsAPI')]"
+                    },
+                    "PullRequestTitleFilter": {
+                        "value": "[parameters('PullRequestTitleFilter')]"
+                    },
+                    "DelayDays": {
+                        "value": "[parameters('DelayDays')]"
                     }
                 }
             }
