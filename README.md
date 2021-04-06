@@ -24,7 +24,7 @@ Run the following command to initiate the deployment (update with details from y
 az deployment group create \
     --resource-group github-pr-teams-notification-002 \
     --template-uri https://raw.githubusercontent.com/neilpeterson/github-pr-teams-notification/master/deployment/azuredeploy.json \
-    --parameters GitHubPAT=<> emailAddress=nepeters@microsoft.com
+    --parameters emailAddress=nepeters@microsoft.com RemoveSourceControll=true
 ```
 
 Add `RemoveSourceControll=true` to remove source controll integration.

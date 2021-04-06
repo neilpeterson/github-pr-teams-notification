@@ -89,10 +89,6 @@
                             "value": "[concat('@Microsoft.KeyVault(SecretUri=', parameters('GitHubPATUri'), ')')]"
                         },
                         {
-                            "name": "GitHubPAT",
-                            "value": "[concat('@Microsoft.KeyVault(SecretUri=', parameters('GitHubPATUri'), ')')]"
-                        },
-                        {
                             "name": "TeamsWebHook",
                             "value": "[parameters('TeamsWebHook')]"
                         },
