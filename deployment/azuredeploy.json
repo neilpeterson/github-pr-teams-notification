@@ -9,6 +9,18 @@
             "type": "bool",
             "defaultValue": false
         },
+        "TeamsWebHook": {
+            "type": "string"
+        },
+        "PullRequestsAPI": {
+            "type": "string"
+        },
+        "PullRequestTitleFilter": {
+            "type": "string"
+        },
+        "DelayDays": {
+            "type": "int"
+        },
         "emailAddress": {
             "type": "string"
         }
@@ -95,6 +107,18 @@
                     },
                     "KeyVaultName": {
                         "value": "[variables('kay-vault-name')]"
+                    },
+                    "TeamsWebHook": {
+                        "value": "[parameters('TeamsWebHook')]"
+                    },
+                    "PullRequestsAPI": {
+                        "value": "[parameters('PullRequestsAPI')]"
+                    },
+                    "PullRequestTitleFilter": {
+                        "value": "[parameters('PullRequestTitleFilter')]"
+                    },
+                    "DelayDays": {
+                        "value": "[parameters('DelayDays')]"
                     }
                 }
             }

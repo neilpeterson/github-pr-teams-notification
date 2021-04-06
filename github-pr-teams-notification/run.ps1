@@ -80,7 +80,7 @@ Catch {throw $_.Exception.Message}
 
 # Process pull requests and send Teams notification if applicable.
 foreach ($pull in $pulls) {
-    if ($pull.title -like $env:TitleFilter) {
+    if ($pull.title -like $env:PullRequestTitleFilter) {
         
         $creationDate = $pull.created_at
         $dateDiff = ((get-date) - ($creationDate))

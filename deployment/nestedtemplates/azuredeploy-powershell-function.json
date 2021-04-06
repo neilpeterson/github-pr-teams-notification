@@ -16,6 +16,18 @@
         },
         "GitHubPATUri": {
             "type": "securestring"
+        },
+        "TeamsWebHook": {
+            "type": "string"
+        },
+        "PullRequestsAPI": {
+            "type": "string"
+        },
+        "PullRequestTitleFilter": {
+            "type": "string"
+        },
+        "DelayDays": {
+            "type": "string"
         }
     },
     "variables": {
@@ -75,7 +87,28 @@
                         {
                             "name": "GitHubPAT",
                             "value": "[concat('@Microsoft.KeyVault(SecretUri=', parameters('GitHubPATUri'), ')')]"
+                        },
+                        {
+                            "name": "GitHubPAT",
+                            "value": "[concat('@Microsoft.KeyVault(SecretUri=', parameters('GitHubPATUri'), ')')]"
+                        },
+                        {
+                            "name": "TeamsWebHook",
+                            "value": "[parameters('TeamsWebHook')]"
+                        },
+                        {
+                            "name": "PullRequestsAPI",
+                            "value": "[parameters('PullRequestsAPI')]"
+                        },
+                        {
+                            "name": "PullRequestTitleFilter",
+                            "value": "[parameters('PullRequestTitleFilter')]"
+                        },
+                        {
+                            "name": "DelayDays",
+                            "value": "[parameters('DelayDays')]"
                         }
+
                     ],
                     "scmType": "None"
                 },
