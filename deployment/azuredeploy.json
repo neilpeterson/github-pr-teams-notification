@@ -20,6 +20,12 @@
         "emailAddress": {
             "type": "string"
         },
+        "commentLabel": {
+            "type": "string"
+        },
+        "comment": {
+            "type": "string"
+        },
         "RemoveSourceControll": {
             "type": "bool",
             "defaultValue": false
@@ -153,6 +159,12 @@
                     },
                     "DelayDays": {
                         "value": "[parameters('DelayDays')]"
+                    },
+                    "commentLabel": {
+                        "value": "[parameters('commentLabel')]"
+                    },
+                    "comment": {
+                        "value": "[parameters('comment')]"
                     }
                 }
             }

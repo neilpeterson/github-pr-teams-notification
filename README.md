@@ -24,6 +24,8 @@ These values are needed when deploying the solution. At deployment time, you are
 | PullRequestTitleFilter | string | Pull requests are filtered on this value. |
 | DelayDays | int | Only pull requests older than this value are processed. |
 | EmailAddress | string | Email address where function failure alerts will be sent. |
+| Comment | string | A pre-determined comment that can be applied to the pull request. |
+| CommentLabel | string | The value shown on the card comment button. |
 | RemoveSourceControll | bool | When true, removes source control integration. |
 
 ## Solution deployment

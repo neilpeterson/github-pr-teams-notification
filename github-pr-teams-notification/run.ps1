@@ -2,7 +2,10 @@ param($Timer)
 
 $Strings = @(
     "Doc GitHub automation"
-    "Pull request awaiting approval"
+    "Pull request awaiting review"
+    "View PR"
+    "Comment on PR"
+    "Submit Comment"
 )
 
 # Get pull request diff and format for Teams.
@@ -26,7 +29,7 @@ function Send-TeamsMessage ($PullDetails, $diff) {
     # Adaptive cards are not yet supported in Teams, here we are using a message card.
     # https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference
     $webhookMessage = @{
-        "@type"      = "MessageCard"
+        "@type"      = "ActionCard"
         "@context"   = "http://schema.org/extensions"
         "summary"    = $Strings[0]
         "title"      = $Strings[1]
@@ -46,7 +49,7 @@ function Send-TeamsMessage ($PullDetails, $diff) {
         "potentialAction" = @(
             @{
                 '@type' = "OpenUri"
-                name = "View PR"
+                name = $Strings[2]
                 targets = @(
                     @{
                     "os" = "default"
@@ -56,9 +59,28 @@ function Send-TeamsMessage ($PullDetails, $diff) {
             }
             @{
                 '@type' = "HttpPOST"
-                name = "Sign Off"
+                name = $env:PreDeterminedCommentLabel
                 target = $env:CommentFunctionWebhook
                 body = $PullDetails.comments_url
+            }
+            @{
+                '@type' = "ActionCard"
+                name = $Strings[3]
+                inputs = @(
+                    @{
+                        "@type" = "TextInput"
+                        "id" = "comment"
+                        "title" = "Add Comment"
+                    }
+                )
+                actions = @(
+                    @{
+                        "@type" = "HttpPOST"
+                        name = $Strings[4]
+                        target = $env:CommentFunctionWebhook
+                        body = "comment={{comment.value}}"
+                    }
+                )
             }
         )
     } | ConvertTo-Json -Depth 50

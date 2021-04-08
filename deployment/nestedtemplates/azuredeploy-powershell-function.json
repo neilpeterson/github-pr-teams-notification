@@ -28,6 +28,12 @@
         },
         "DelayDays": {
             "type": "int"
+        },
+        "commentLabel": {
+            "type": "string"
+        },
+        "comment": {
+            "type": "string"
         }
     },
     "variables": {
@@ -103,8 +109,15 @@
                         {
                             "name": "DelayDays",
                             "value": "[parameters('DelayDays')]"
+                        },
+                        {
+                            "name": "Comment",
+                            "value": "[parameters('comment')]"
+                        },
+                        {
+                            "name": "CommentLabel",
+                            "value": "[parameters('commentLabel')]"
                         }
-
                     ],
                     "scmType": "None"
                 },
