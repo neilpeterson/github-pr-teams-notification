@@ -15,14 +15,14 @@
 Create a resource group for the deployment.
 
 ```azurecli
-az group create --name github-pr-teams-notification-002 --location eastus
+az group create --name github-pr-teams-notification-003 --location eastus
 ```
 
 Run the following command to initiate the deployment (update with details from your environment).
 
 ```azurecli
 az deployment group create \
-    --resource-group github-pr-teams-notification-002 \
+    --resource-group github-pr-teams-notification-003 \
     --template-uri https://raw.githubusercontent.com/neilpeterson/github-pr-teams-notification/master/deployment/azuredeploy.json \
     --parameters emailAddress=nepeters@microsoft.com RemoveSourceControll=true
 ```
