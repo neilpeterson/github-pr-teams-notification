@@ -5,10 +5,6 @@
         "GitHubPAT": {
             "type": "securestring"
         },
-        "RemoveSourceControll": {
-            "type": "bool",
-            "defaultValue": false
-        },
         "TeamsWebHook": {
             "type": "string"
         },
@@ -23,6 +19,10 @@
         },
         "emailAddress": {
             "type": "string"
+        },
+        "RemoveSourceControll": {
+            "type": "bool",
+            "defaultValue": false
         }
     },
     "variables": {
