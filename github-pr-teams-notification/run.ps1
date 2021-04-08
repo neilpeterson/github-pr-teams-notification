@@ -2,9 +2,7 @@ param($Timer)
 
 $Strings = @(
     "Doc GitHub automation"
-    "Public to private pull request awaiting approval."
-    "Pull Request Diff"
-    "Please review or sign off on the pull request"
+    "Pull request awaiting approval"
 )
 
 # Get pull request diff and format for Teams.
@@ -14,7 +12,7 @@ function Get-PullRequestDiff ($diff) {
     Try {$diff = Invoke-RestMethod -Uri $pull.diff_url -Method Get -Headers $GitHubHeader}
     Catch {throw $_.Exception.Message}
 
-    # Format diff for Teams webhook.
+    # Format diff for Teams webhook (add line break)
     $lines = $diff.Split([Environment]::NewLine) | ? { $_ -ne "" }
     foreach ($pull in $lines) {
         $results += "$pull <br>"
@@ -23,24 +21,26 @@ function Get-PullRequestDiff ($diff) {
 }
 
 # Send a message to a Teams channel which includes the URL of the pull request and pull request details.
-function Send-TeamsMessage ($url, $commentsUrl, $diff) {
+function Send-TeamsMessage ($PullDetails, $diff) {
 
+    # Adaptive cards are not yet supported in Teams, here we are using a message card.
+    # https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference
     $webhookMessage = @{
-        "@type"      = "ActionCard"
+        "@type"      = "MessageCard"
         "@context"   = "http://schema.org/extensions"
         "summary"    = $Strings[0]
-        "themeColor" = '700015'
         "title"      = $Strings[1]
-        # "text"       = $diff
+        "themeColor" = '0078D7'
         "sections" = @(
             @{
-                "activityTitle" = $Strings[2]
+                "activityTitle" = $PullDetails.user.login
+                "activitySubtitle" = $PullDetails.created_at
+                "activityImage" = $PullDetails.user.avatar_url
+                "activityText" = $PullDetails.title
             }
             @{
+                "activityTitle" = "Pull Request Diff"
                 "activityText" = $diff
-            }
-            @{
-                "activityTitle" = $Strings[3]
             }
         )
         "potentialAction" = @(
@@ -50,7 +50,7 @@ function Send-TeamsMessage ($url, $commentsUrl, $diff) {
                 targets = @(
                     @{
                     "os" = "default"
-                    "uri" = $url
+                    "uri" = $PullDetails.html_url
                     }
                 )
             }
@@ -58,7 +58,7 @@ function Send-TeamsMessage ($url, $commentsUrl, $diff) {
                 '@type' = "HttpPOST"
                 name = "Sign Off"
                 target = $env:CommentFunctionWebhook
-                body = $commentsUrl
+                body = $PullDetails.comments_url
             }
         )
     } | ConvertTo-Json -Depth 50
@@ -69,7 +69,7 @@ function Send-TeamsMessage ($url, $commentsUrl, $diff) {
         "Body"        = $webhookMessage
         "ContentType" = 'application/json'
     }
-    
+
     Invoke-RestMethod @webhookCall
 }
 
@@ -81,13 +81,12 @@ Catch {throw $_.Exception.Message}
 # Process pull requests and send Teams notification if applicable.
 foreach ($pull in $pulls) {
     if ($pull.title -like $env:PullRequestTitleFilter) {
-        
         $creationDate = $pull.created_at
         $dateDiff = ((get-date) - ($creationDate))
 
-        if ($dateDiff.Days -gt $env:DelayDays) {     
+        if ($dateDiff.Days -lt $env:DelayDays) {     
             $finalDiff = Get-PullRequestDiff($pull)
-            Send-TeamsMessage $pull.html_url $pull.comments_url $finalDiff
+            Send-TeamsMessage $pull $finalDiff
         }
     }
 }
