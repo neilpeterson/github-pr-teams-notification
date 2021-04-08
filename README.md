@@ -1,4 +1,8 @@
-# GitHub ADO Sync
+# GitHub pull request notification automation
+
+This solution provides an MS Teams notification when scheduled or expected pull requests have not been addressed after a pre-determined time. The notification includes details about the pull request, including diff information. The notification also provides automation for adding a pre-determined / fixed comment to the pull request.
+
+![](images/card-sample.png)
 
 ## Configuration
 
@@ -6,7 +10,7 @@ To configure this solution:
 
 - First, create a Teams webhook on the target Teams channel (docs).
 - Deploy the templates found in this repository (instructions).
-Add the Azure functions app webhook from the commenting function to the notification function's app settings (instructions).
+- Add the Azure functions app webhook from the commenting function to the notification function's app settings (instructions).
 
 ## Solution deployment parameters
 
