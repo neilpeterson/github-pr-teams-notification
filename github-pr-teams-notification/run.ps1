@@ -61,7 +61,7 @@ function Send-TeamsMessage ($PullDetails, $diff) {
                 '@type' = "HttpPOST"
                 name = $env:PreDeterminedCommentLabel
                 target = $env:CommentFunctionWebhook
-                body = $PullDetails.comments_url
+                body = $env:PreDeterminedComment + ',' + $PullDetails.comments_url
             }
             @{
                 '@type' = "ActionCard"
@@ -78,7 +78,7 @@ function Send-TeamsMessage ($PullDetails, $diff) {
                         "@type" = "HttpPOST"
                         name = $Strings[4]
                         target = $env:CommentFunctionWebhook
-                        body = "comment={{comment.value}}"
+                        body = "{{comment.value}}" + ',' + $PullDetails.comments_url
                     }
                 )
             }
@@ -103,10 +103,11 @@ Catch {throw $_.Exception.Message}
 # Process pull requests and send Teams notification if applicable.
 foreach ($pull in $pulls) {
     if ($pull.title -like $env:PullRequestTitleFilter) {
+        
         $creationDate = $pull.created_at
         $dateDiff = ((get-date) - ($creationDate))
-
-        if ($dateDiff.Days -lt $env:DelayDays) {     
+        
+        if ($dateDiff.Days -gt $env:DelayDays) {    
             $finalDiff = Get-PullRequestDiff($pull)
             Send-TeamsMessage $pull $finalDiff
         }
