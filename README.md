@@ -2,7 +2,7 @@
 
 This solution provides an MS Teams notification when scheduled or expected pull requests have not been addressed after a pre-determined time. The notification includes details about the pull request, including diff information. The notification also provides automation for adding a pre-determined / fixed comment to the pull request.
 
-![](images/card-sample.png)
+![](images/card-sample-two.png)
 
 ## Solution components
 
