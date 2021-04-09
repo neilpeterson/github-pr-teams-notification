@@ -35,7 +35,7 @@ These values are needed when deploying the solution. At deployment time, you are
 | DelayDays | int | Only open pull requests older than this value are processed. |
 | EmailAddress | string | Email address where Azure Monitor will send function failure alerts. |
 | PreDeterminedComment | string | A pre-determined comment that can be applied to the pull request with a single click. |
-| CommentLabel | string | The value shown on the card for the pre-determined comment button. |
+| PreDeterminedCommentLabel | string | The value shown on the card for the pre-determined comment button. |
 | RemoveSourceControll | bool | When true, removes source control integration. |
 
 ## Solution deployment
@@ -43,7 +43,7 @@ These values are needed when deploying the solution. At deployment time, you are
 Create a resource group for the deployment.
 
 ```azurecli
-az group create --name github-pr-teams-notification --location eastus
+az group create --name github-pr-teams-notification-008 --location eastus
 ```
 
 Run the following command to initiate the deployment. When prompted, enter the value for each parameter.
@@ -58,7 +58,7 @@ Add `RemoveSourceControll=true` to remove source controll integration.
 
 ```azurecli
 az deployment group create \
-    --resource-group github-pr-teams-notification \
+    --resource-group github-pr-teams-notification-008 \
     --template-uri https://raw.githubusercontent.com/neilpeterson/github-pr-teams-notification/master/deployment/azuredeploy.json
     --parameters RemoveSourceControll=true
 ```

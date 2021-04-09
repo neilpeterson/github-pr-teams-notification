@@ -20,7 +20,7 @@
         "emailAddress": {
             "type": "string"
         },
-        "commentLabel": {
+        "PreDeterminedCommentLabel": {
             "type": "string"
         },
         "PreDeterminedComment": {
@@ -160,8 +160,8 @@
                     "DelayDays": {
                         "value": "[parameters('DelayDays')]"
                     },
-                    "commentLabel": {
-                        "value": "[parameters('commentLabel')]"
+                    "PreDeterminedCommentLabel": {
+                        "value": "[parameters('PreDeterminedCommentLabel')]"
                     },
                     "PreDeterminedComment": {
                         "value": "[parameters('PreDeterminedComment')]"

@@ -29,7 +29,7 @@
         "DelayDays": {
             "type": "int"
         },
-        "CommentLabel": {
+        "PreDeterminedCommentLabel": {
             "type": "string"
         },
         "PreDeterminedComment": {
@@ -115,8 +115,8 @@
                             "value": "[parameters('PreDeterminedComment')]"
                         },
                         {
-                            "name": "CommentLabel",
-                            "value": "[parameters('CommentLabel')]"
+                            "name": "PreDeterminedCommentLabel",
+                            "value": "[parameters('PreDeterminedCommentLabel')]"
                         }
                     ],
                     "scmType": "None"
@@ -186,10 +186,6 @@
         "identity": {
             "type": "string",
             "value": "[reference(resourceId('Microsoft.Web/sites', parameters('FunctionAppName')), '2019-08-01', 'full').identity.principalId]"
-        },
-        "Url": {
-            "type": "string",
-            "value": "[listsecrets(resourceId('Microsoft.Web/sites/functions', parameters('FunctionAppName'), 'github-pr-teams-notification'),'2015-08-01').trigger_url]"
-        }  
+        }
     }
 }
