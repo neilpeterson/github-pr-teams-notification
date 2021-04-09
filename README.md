@@ -11,7 +11,7 @@ The logic for this solution is split between two Azure Functions.
 - **github-pr-teams-notification** - Time trigger-based Azure Function that uses the GitHub pulls API to identify all pull requests that have a name that matches a filter value and that have been open for a pre-determined time. Once detected, the GitHub pull request diff API is used to get and format the pull request difff. This function then sends the notification to a Teams webhook.
 - **github-pr-teams-comment** - Webhook-based Azure Function that is engaged by the notification card. Once engaged, this function adds a comment to the pull request. 
 
-In addition to the Azure Functions, this solution includes Azure Key Vault for storing sensitive application values, Azure Log Analytics workspace for storing solution logs. An Azure Monitor alert is also configured to send a notification email if function execution fails for any reason.
+In addition to the Azure Functions, this solution includes Azure Key Vault for storing sensitive application values, Azure Log Analytics workspace for storing solution logs. An Azure Monitor alert is also configured to send a notification email if function execution fails.
 
 ## Configuration
 

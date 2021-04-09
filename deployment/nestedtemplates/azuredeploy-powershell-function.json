@@ -111,7 +111,7 @@
                             "value": "[parameters('DelayDays')]"
                         },
                         {
-                            "name": "Comment",
+                            "name": "PreDeterminedComment",
                             "value": "[parameters('PreDeterminedComment')]"
                         },
                         {
