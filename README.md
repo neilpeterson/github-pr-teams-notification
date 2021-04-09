@@ -42,14 +42,14 @@ These values are needed when deploying the solution. At deployment time, you are
 Create a resource group for the deployment.
 
 ```azurecli
-az group create --name github-pr-teams-notification-004 --location eastus
+az group create --name github-pr-teams-notification --location eastus
 ```
 
 Run the following command to initiate the deployment. When prompted, enter the value for each parameter.
 
 ```azurecli
 az deployment group create \
-    --resource-group github-pr-teams-notification-003 \
+    --resource-group github-pr-teams-notification \
     --template-uri https://raw.githubusercontent.com/neilpeterson/github-pr-teams-notification/master/deployment/azuredeploy.json
 ```
 
@@ -57,7 +57,7 @@ Add `RemoveSourceControll=true` to remove source controll integration.
 
 ```azurecli
 az deployment group create \
-    --resource-group github-pr-teams-notification-004 \
+    --resource-group github-pr-teams-notification \
     --template-uri https://raw.githubusercontent.com/neilpeterson/github-pr-teams-notification/master/deployment/azuredeploy.json
     --parameters RemoveSourceControll=true
 ```

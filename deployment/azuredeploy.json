@@ -23,7 +23,7 @@
         "commentLabel": {
             "type": "string"
         },
-        "comment": {
+        "PreDeterminedComment": {
             "type": "string"
         },
         "RemoveSourceControll": {
@@ -163,8 +163,8 @@
                     "commentLabel": {
                         "value": "[parameters('commentLabel')]"
                     },
-                    "comment": {
-                        "value": "[parameters('comment')]"
+                    "PreDeterminedComment": {
+                        "value": "[parameters('PreDeterminedComment')]"
                     }
                 }
             }
