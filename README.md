@@ -1,6 +1,6 @@
 # GitHub pull request notification automation
 
-This solution provides an MS Teams notification when scheduled or expected pull requests have not been addressed after a pre-determined time. The notification includes details about the pull request, including diff information. The notification also provides automation for adding a pre-determined / fixed comment to the pull request.
+This solution provides an MS Teams notification when scheduled or expected pull requests have not been addressed after a pre-determined time. The notification includes details about the pull request, including diff information. The notification also provides automation for adding a single click pre-determined comment and also free-formed comments.
 
 ![](images/card-sample.png)
 
@@ -17,9 +17,10 @@ In addition to the Azure Functions, this solution includes Azure Key Vault for s
 
 To configure this solution:
 
-- First, create a Teams webhook on the target Teams channel (docs).
-- Deploy the templates found in this repository (instructions).
-- Add the Azure functions app webhook from the commenting function to the notification function's app settings (instructions).
+- First, create a Teams webhook on the target Teams channel ([docs](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)).
+- Examine and collect the items needed for the solution to function. These are detailed under [soluton deployment parameters](#solution-deployment-parameters). 
+- Deploy the templates found in this repository ([instructions](#solution-deployment)).
+- Add the Azure functions app webhook from the commenting function to the notification function's app settings ([instructions](#configure-webhook-on-function)).
 
 ## Solution deployment parameters
 
@@ -27,14 +28,14 @@ These values are needed when deploying the solution. At deployment time, you are
 
 | Parameter | Type | Description |
 |---|---|---|
-| GitHubPAT | securestring | GitHub personal access token. |
+| GitHubPAT | securestring | GitHub personal access token used for GitHub API authentication ([docs](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token)). |
 | TeamsWebHook | string | Teams webhook URI. |
 | PullRequestsAPI | string | Address of the pulls api for the target GitHub repository ([docs](https://docs.github.com/en/rest/reference/pulls)). |
-| PullRequestTitleFilter | string | Pull requests are filtered on this value. |
-| DelayDays | int | Only pull requests older than this value are processed. |
-| EmailAddress | string | Email address where function failure alerts will be sent. |
-| Comment | string | A pre-determined comment that can be applied to the pull request. |
-| CommentLabel | string | The value shown on the card comment button. |
+| PullRequestTitleFilter | string | Only pull requests with this value in the name are processed by the solution. |
+| DelayDays | int | Only open pull requests older than this value are processed. |
+| EmailAddress | string | Email address where Azure Monitor will send function failure alerts. |
+| PreDeterminedComment | string | A pre-determined comment that can be applied to the pull request with a single click. |
+| CommentLabel | string | The value shown on the card for the pre-determined comment button. |
 | RemoveSourceControll | bool | When true, removes source control integration. |
 
 ## Solution deployment
@@ -42,7 +43,7 @@ These values are needed when deploying the solution. At deployment time, you are
 Create a resource group for the deployment.
 
 ```azurecli
-az group create --name github-pr-teams-notification-006 --location eastus
+az group create --name github-pr-teams-notification --location eastus
 ```
 
 Run the following command to initiate the deployment. When prompted, enter the value for each parameter.
