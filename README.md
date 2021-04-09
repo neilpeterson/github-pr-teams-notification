@@ -2,7 +2,7 @@
 
 This solution provides an MS Teams notification when scheduled or expected pull requests have not been addressed after a pre-determined time. The notification includes details about the pull request, including diff information. The notification also provides automation for adding a pre-determined / fixed comment to the pull request.
 
-![](images/card-sample-two.png)
+![](images/card-sample.png)
 
 ## Solution components
 
@@ -42,7 +42,7 @@ These values are needed when deploying the solution. At deployment time, you are
 Create a resource group for the deployment.
 
 ```azurecli
-az group create --name github-pr-teams-notification --location eastus
+az group create --name github-pr-teams-notification-006 --location eastus
 ```
 
 Run the following command to initiate the deployment. When prompted, enter the value for each parameter.
@@ -65,3 +65,13 @@ az deployment group create \
 ## Configure WebHook on Function
 
 Once the deployment has completed, retrieve the Function webhook address from the comment function, and add this to the Teams notification function's application configuration.
+
+To get the function webhook address, navigate to the **github-pr-teams-comment** function and copy the function URL.
+
+![](images/function-url.png)
+
+Next, navigate to the function app, select configuration, and select **New application setting**. Enter **CommentFunctionWebhook** for the name and paste in the webhook address for the value.
+
+![](images/app-setting.png)
+
+Click **OK**, **Save**, and **Continue**.
